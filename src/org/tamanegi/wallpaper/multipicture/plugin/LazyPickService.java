@@ -1,7 +1,11 @@
 package org.alee.wallpaper.multipicture.plugin;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -323,6 +327,18 @@ public abstract class LazyPickService extends Service
         private void sendStopCompleted()
         {
             sendReply(Message.obtain(null, MSG_STOP_COMPLETED));
+        }
+    }
+
+    protected static void registerReceiver(Context context,
+                                           BroadcastReceiver receiver,
+                                           IntentFilter filter)
+    {
+        if(Build.VERSION.SDK_INT >= 33) {
+            context.registerReceiver(receiver, filter,
+                                     Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            context.registerReceiver(receiver, filter);
         }
     }
 }

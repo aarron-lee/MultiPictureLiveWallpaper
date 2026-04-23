@@ -643,20 +643,20 @@ public class MultiPictureRenderer
 
         filter = new IntentFilter();
         filter.addAction(ACTION_CHANGE_PICTURE);
-        context.registerReceiver(receiver, filter);
+        registerReceiver(context, receiver, filter);
 
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_PACKAGE_ADDED);
         filter.addDataScheme("package");
-        context.registerReceiver(receiver, filter);
+        registerReceiver(context, receiver, filter);
 
         filter = new IntentFilter();
         filter.addAction(ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
-        context.registerReceiver(receiver, filter);
+        registerReceiver(context, receiver, filter);
 
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_USER_PRESENT);
-        context.registerReceiver(receiver, filter);
+        registerReceiver(context, receiver, filter);
 
         // init conf
         pic_whole_lock = new Object();
@@ -1831,8 +1831,10 @@ public class MultiPictureRenderer
             context.getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(ACTION_CHANGE_PICTURE);
+        int pendingFlags = Build.VERSION.SDK_INT >= 23
+            ? PendingIntent.FLAG_IMMUTABLE : 0;
         PendingIntent alarm_intent =
-            PendingIntent.getBroadcast(context, 0, intent, 0);
+            PendingIntent.getBroadcast(context, 0, intent, pendingFlags);
 
         mgr.cancel(alarm_intent);
 
@@ -2438,6 +2440,18 @@ public class MultiPictureRenderer
     private static float ratioRange(float v)
     {
         return Math.min(1, Math.max(0, v));
+    }
+
+    private static void registerReceiver(Context context,
+                                         BroadcastReceiver receiver,
+                                         IntentFilter filter)
+    {
+        if(Build.VERSION.SDK_INT >= 33) {
+            context.registerReceiver(receiver, filter,
+                                     Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            context.registerReceiver(receiver, filter);
+        }
     }
 
     private int detectBackgroundColor(Bitmap bmp, float xratio, float yratio)

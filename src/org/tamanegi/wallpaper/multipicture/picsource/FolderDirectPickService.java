@@ -220,7 +220,7 @@ public class FolderDirectPickService extends AbstractFileListPickService
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
         filter.addDataScheme(ContentResolver.SCHEME_FILE);
-        registerReceiver(receiver, filter);
+        registerReceiver(this, receiver, filter);
     }
 
     @Override
