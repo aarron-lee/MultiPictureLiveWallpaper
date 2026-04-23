@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'org.tamanegi.wallpaper.multipicture'
+    namespace 'org.alee.wallpaper.multipicture'
     compileSdk 34
 
     defaultConfig {
-        applicationId 'org.tamanegi.wallpaper.multipicture'
+        applicationId 'org.alee.wallpaper.multipicture'
         minSdk 7
         targetSdk 34
         versionCode 48

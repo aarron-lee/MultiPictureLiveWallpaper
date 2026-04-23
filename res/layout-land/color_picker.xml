@@ -10,7 +10,7 @@
         android:layout_height="120dip"
         android:layout_margin="6dip"
         />
-  <org.tamanegi.wallpaper.multipicture.ColorPickerView
+  <org.alee.wallpaper.multipicture.ColorPickerView
      android:id="@+id/color_picker_picker"
      android:layout_width="180dip"
      android:layout_height="140dip"

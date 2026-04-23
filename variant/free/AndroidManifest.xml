@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.tamanegi.wallpaper.multipicture"
+          package="org.alee.wallpaper.multipicture"
           android:versionCode="48"
           android:versionName="0.6.11">
 
@@ -14,7 +14,7 @@
                android:largeHeap="true">
 
     <!-- main live wallpaper service -->
-    <service android:name="org.tamanegi.wallpaper.multipicture.MultiPictureService"
+    <service android:name="org.alee.wallpaper.multipicture.MultiPictureService"
              android:permission="android.permission.BIND_WALLPAPER"
              android:exported="true">
       <intent-filter>
@@ -25,83 +25,83 @@
     </service>
 
     <!-- settings -->
-    <activity android:name="org.tamanegi.wallpaper.multipicture.MultiPictureSetting"
+    <activity android:name="org.alee.wallpaper.multipicture.MultiPictureSetting"
               android:label="@string/app_name"
               android:exported="true" />
 
-    <activity android:name="org.tamanegi.wallpaper.multipicture.QRViewer"
+    <activity android:name="org.alee.wallpaper.multipicture.QRViewer"
               android:theme="@android:style/Theme.Light"
               android:screenOrientation="portrait"
               android:exported="false" />
 
     <!-- activity for picture source -->
-    <activity android:name="org.tamanegi.wallpaper.multipicture.picsource.SingleSource"
+    <activity android:name="org.alee.wallpaper.multipicture.picsource.SingleSource"
               android:label="@string/pref_single_picture_title"
               android:icon="@drawable/ic_picsource_single"
               android:theme="@android:style/Theme.NoDisplay"
               android:exported="true">
       <intent-filter>
-        <action android:name="org.tamanegi.wallpaper.multipicture.action.GET_PICTURE_SOURCE" />
+        <action android:name="org.alee.wallpaper.multipicture.action.GET_PICTURE_SOURCE" />
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
 
-    <activity android:name="org.tamanegi.wallpaper.multipicture.picsource.AlbumSource"
+    <activity android:name="org.alee.wallpaper.multipicture.picsource.AlbumSource"
               android:label="@string/pref_album_title"
               android:icon="@drawable/ic_picsource_album"
               android:exported="true">
       <intent-filter>
-        <action android:name="org.tamanegi.wallpaper.multipicture.action.GET_PICTURE_SOURCE" />
+        <action android:name="org.alee.wallpaper.multipicture.action.GET_PICTURE_SOURCE" />
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
 
-    <activity android:name="org.tamanegi.wallpaper.multipicture.picsource.FolderSource"
+    <activity android:name="org.alee.wallpaper.multipicture.picsource.FolderSource"
               android:label="@string/pref_folder_title"
               android:icon="@drawable/ic_picsource_folder"
               android:exported="true">
       <intent-filter>
-        <action android:name="org.tamanegi.wallpaper.multipicture.action.GET_PICTURE_SOURCE" />
+        <action android:name="org.alee.wallpaper.multipicture.action.GET_PICTURE_SOURCE" />
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
 
-    <activity android:name="org.tamanegi.wallpaper.multipicture.picsource.FolderPicker"
+    <activity android:name="org.alee.wallpaper.multipicture.picsource.FolderPicker"
               android:label="@string/folder_picker_title"
               android:exported="false" />
 
     <!-- picker service for picture source -->
-    <service android:name="org.tamanegi.wallpaper.multipicture.picsource.SinglePickService"
+    <service android:name="org.alee.wallpaper.multipicture.picsource.SinglePickService"
              android:exported="true">
       <intent-filter>
-        <action android:name="org.tamanegi.wallpaper.multipicture.plugin.LazyPickService" />
+        <action android:name="org.alee.wallpaper.multipicture.plugin.LazyPickService" />
       </intent-filter>
     </service>
 
-    <service android:name="org.tamanegi.wallpaper.multipicture.picsource.AlbumPickService"
+    <service android:name="org.alee.wallpaper.multipicture.picsource.AlbumPickService"
              android:exported="true">
       <intent-filter>
-        <action android:name="org.tamanegi.wallpaper.multipicture.plugin.LazyPickService" />
+        <action android:name="org.alee.wallpaper.multipicture.plugin.LazyPickService" />
       </intent-filter>
     </service>
 
-    <service android:name="org.tamanegi.wallpaper.multipicture.picsource.FolderPickService"
+    <service android:name="org.alee.wallpaper.multipicture.picsource.FolderPickService"
              android:exported="true">
       <intent-filter>
-        <action android:name="org.tamanegi.wallpaper.multipicture.plugin.LazyPickService" />
+        <action android:name="org.alee.wallpaper.multipicture.plugin.LazyPickService" />
       </intent-filter>
     </service>
 
-    <service android:name="org.tamanegi.wallpaper.multipicture.picsource.FolderDirectPickService"
+    <service android:name="org.alee.wallpaper.multipicture.picsource.FolderDirectPickService"
              android:process=":internalPlugin"
              android:exported="true">
       <intent-filter>
-        <action android:name="org.tamanegi.wallpaper.multipicture.plugin.LazyPickService" />
+        <action android:name="org.alee.wallpaper.multipicture.plugin.LazyPickService" />
       </intent-filter>
     </service>
 
     <!-- launch from "open" -->
-    <activity android:name="org.tamanegi.wallpaper.multipicture.LaunchDispatcher"
+    <activity android:name="org.alee.wallpaper.multipicture.LaunchDispatcher"
               android:label="@string/app_name"
               android:theme="@android:style/Theme.NoDisplay"
               android:exported="true">
@@ -112,7 +112,7 @@
     </activity>
 
     <!-- for shortcut -->
-    <activity android:name="org.tamanegi.wallpaper.multipicture.CreateShortcut"
+    <activity android:name="org.alee.wallpaper.multipicture.CreateShortcut"
               android:label="@string/shortcut_name_settings"
               android:theme="@android:style/Theme.NoDisplay"
               android:exported="true">

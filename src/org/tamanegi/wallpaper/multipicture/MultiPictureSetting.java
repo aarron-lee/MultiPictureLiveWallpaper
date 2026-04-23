@@ -1,13 +1,13 @@
-package org.tamanegi.wallpaper.multipicture;
+package org.alee.wallpaper.multipicture;
 
 import java.lang.reflect.Method;
 import java.util.IllegalFormatException;
 
-import org.tamanegi.wallpaper.multipicture.picsource.AlbumSource;
-import org.tamanegi.wallpaper.multipicture.picsource.FolderSource;
-import org.tamanegi.wallpaper.multipicture.picsource.PictureUtils;
-import org.tamanegi.wallpaper.multipicture.picsource.SingleSource;
-import org.tamanegi.wallpaper.multipicture.plugin.PictureSourceContract;
+import org.alee.wallpaper.multipicture.picsource.AlbumSource;
+import org.alee.wallpaper.multipicture.picsource.FolderSource;
+import org.alee.wallpaper.multipicture.picsource.PictureUtils;
+import org.alee.wallpaper.multipicture.picsource.SingleSource;
+import org.alee.wallpaper.multipicture.plugin.PictureSourceContract;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -157,7 +157,7 @@ public class MultiPictureSetting extends PreferenceActivity
         resolver = getContentResolver();
         handler = new Handler();
 
-        if(! "org.tamanegi.wallpaper.multipicture".equals(getPackageName())) {
+        if(! "org.alee.wallpaper.multipicture".equals(getPackageName())) {
             getPreferenceScreen().removePreference(
                     getPreferenceManager().findPreference("other.cat"));
         }

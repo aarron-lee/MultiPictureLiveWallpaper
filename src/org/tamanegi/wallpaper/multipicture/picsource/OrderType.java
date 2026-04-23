@@ -1,4 +1,4 @@
-package org.tamanegi.wallpaper.multipicture.picsource;
+package org.alee.wallpaper.multipicture.picsource;
 
 public enum OrderType
 {
