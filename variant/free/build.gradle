@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.application' version '8.3.2'
+}
+
+android {
+    namespace 'org.tamanegi.wallpaper.multipicture'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'org.tamanegi.wallpaper.multipicture'
+        minSdk 7
+        targetSdk 34
+        versionCode 48
+        versionName '0.6.11'
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation project(':')
+}
