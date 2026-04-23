@@ -19,9 +19,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -144,6 +147,47 @@ public class MultiPictureSetting extends PreferenceActivity
             // ignore
             return -1;
         }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        checkStoragePermission();
+    }
+
+    private void checkStoragePermission()
+    {
+        if(Build.VERSION.SDK_INT < 30) {
+            return;
+        }
+        if(Environment.isExternalStorageManager()) {
+            return;
+        }
+        new AlertDialog.Builder(this)
+            .setTitle("Storage Permission Required")
+            .setMessage(
+                "This app needs \"All Files Access\" to load wallpapers " +
+                "from your storage. Please grant the permission on the " +
+                "next screen.")
+            .setPositiveButton(
+                "Grant Permission",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(
+                            Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                            Uri.parse("package:" + getPackageName()));
+                        try {
+                            startActivity(intent);
+                        }
+                        catch(ActivityNotFoundException e) {
+                            startActivity(new Intent(
+                                Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION));
+                        }
+                    }
+                })
+            .setNegativeButton("Not Now", null)
+            .show();
     }
 
     /** Called when the activity is first created. */
