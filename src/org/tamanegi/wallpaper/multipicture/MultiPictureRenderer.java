@@ -47,7 +47,6 @@ import android.os.Message;
 import android.os.Process;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.util.FloatMath;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
 
@@ -1555,11 +1554,11 @@ public class MultiPictureRenderer
             float ang2 = (float)Math.atan2(-dy, dx);
 
             effect.matrix.translate(
-                FloatMath.cos(ang2) * FloatMath.sin(ang1) * 1.01f * wratio,
-                FloatMath.sin(ang2) * FloatMath.sin(ang1) * 1.01f,
-                (FloatMath.cos(ang1) - 1) * 2);
+                (float) Math.cos(ang2) * (float) Math.sin(ang1) * 1.01f * wratio,
+                (float) Math.sin(ang2) * (float) Math.sin(ang1) * 1.01f,
+                ((float) Math.cos(ang1) - 1) * 2);
 
-            effect.alpha *= Math.min((FloatMath.cos(ang1) + 1) * 2, 1);
+            effect.alpha *= Math.min(((float) Math.cos(ang1) + 1) * 2, 1);
         }
         else if(transition == TransitionType.cube) {
             float fact = Math.max(Math.abs(dx), Math.abs(dy));
@@ -1572,13 +1571,13 @@ public class MultiPictureRenderer
 
             effect.matrix
                 .translate(
-                    FloatMath.cos(ang2) * FloatMath.sin(ang1) * wratio,
-                    FloatMath.sin(ang2) * FloatMath.sin(ang1),
-                    (FloatMath.cos(ang1) - 1) * (wratio + 1) * 0.5f)
+                    (float) Math.cos(ang2) * (float) Math.sin(ang1) * wratio,
+                    (float) Math.sin(ang2) * (float) Math.sin(ang1),
+                    ((float) Math.cos(ang1) - 1) * (wratio + 1) * 0.5f)
                 .rotateY(dx * 90)
                 .rotateX(dy * 90);
 
-            effect.alpha *= Math.min(FloatMath.cos(ang1), 1);
+            effect.alpha *= Math.min((float) Math.cos(ang1), 1);
             effect.need_border = true;
         }
         else if(transition == TransitionType.cube_inside) {
@@ -1592,13 +1591,13 @@ public class MultiPictureRenderer
 
             effect.matrix
                 .translate(
-                    FloatMath.cos(ang2) * FloatMath.sin(ang1) * wratio,
-                    FloatMath.sin(ang2) * FloatMath.sin(ang1),
-                    (FloatMath.cos(ang1) - 1) * (wratio + 1) * -0.5f)
+                    (float) Math.cos(ang2) * (float) Math.sin(ang1) * wratio,
+                    (float) Math.sin(ang2) * (float) Math.sin(ang1),
+                    ((float) Math.cos(ang1) - 1) * (wratio + 1) * -0.5f)
                 .rotateY(dx * -90)
                 .rotateX(dy * -90);
 
-            effect.alpha *= Math.min(FloatMath.cos(ang1), 1);
+            effect.alpha *= Math.min((float) Math.cos(ang1), 1);
             effect.need_border = true;
         }
         else if(transition == TransitionType.bookshelf) {
@@ -1617,7 +1616,7 @@ public class MultiPictureRenderer
                 wratio * Math.max(0, 1 - atdx);
 
             rx = rx * sy + rx * (1 - ratdx * ratdx) * rsy;
-            tx += FloatMath.sin(Math.min(1, Math.max(-1, tdx)) *
+            tx += (float) Math.sin(Math.min(1, Math.max(-1, tdx)) *
                                 (float)Math.PI) * 0.25f * wratio * rsy;
             tz = tz * sy + tz * Math.min(1, Math.abs(tdx)) * rsy;
 
@@ -1785,7 +1784,7 @@ public class MultiPictureRenderer
             }
             else if(info.xstep > 0) {
                 float xc = info.xoffset / info.xstep;
-                float xcn = FloatMath.floor(xc);
+                float xcn = (float) Math.floor(xc);
                 float xcd = ratioRange((xc - xcn - 0.0209f) / 0.9582f);
                 info.xoffset = (xcn + xcd) * info.xstep;
             }
