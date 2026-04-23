@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application' version '8.3.2'
+    id 'com.android.application'
 }
 
 android {
@@ -11,7 +11,7 @@ android {
         minSdk 7
         targetSdk 34
         versionCode 48
-        versionName '0.6.11'
+        versionName '0.6.12'
     }
 
     sourceSets {
