@@ -40,10 +40,13 @@ jobs:
             "build-tools;34.0.0"
 
       - name: Decode release keystore
-        if: matrix.build_type == 'release' && secrets.RELEASE_KEYSTORE != ''
+        if: matrix.build_type == 'release'
         env:
           RELEASE_KEYSTORE: ${{ secrets.RELEASE_KEYSTORE }}
-        run: echo "$RELEASE_KEYSTORE" | base64 -d > release.keystore
+        run: |
+          if [ -n "$RELEASE_KEYSTORE" ]; then
+            echo "$RELEASE_KEYSTORE" | base64 -d > release.keystore
+          fi
 
       - name: Make gradlew executable
         run: chmod +x gradlew
