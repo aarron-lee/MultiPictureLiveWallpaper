@@ -1,12 +1,12 @@
-package org.alee.wallpaper.multipicture.picsource;
+package org.tamanegi.wallpaper.multipicture.picsource;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.alee.wallpaper.multipicture.plugin.LazyPickService;
-import org.alee.wallpaper.multipicture.plugin.PictureContentInfo;
-import org.alee.wallpaper.multipicture.plugin.ScreenInfo;
+import org.tamanegi.wallpaper.multipicture.plugin.LazyPickService;
+import org.tamanegi.wallpaper.multipicture.plugin.PictureContentInfo;
+import org.tamanegi.wallpaper.multipicture.plugin.ScreenInfo;
 
 import android.net.Uri;
 import android.os.Handler;

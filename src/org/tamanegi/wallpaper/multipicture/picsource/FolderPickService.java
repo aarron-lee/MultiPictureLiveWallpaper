@@ -1,9 +1,9 @@
-package org.alee.wallpaper.multipicture.picsource;
+package org.tamanegi.wallpaper.multipicture.picsource;
 
 import java.util.ArrayList;
 
-import org.alee.wallpaper.multipicture.MultiPictureSetting;
-import org.alee.wallpaper.multipicture.plugin.ScreenInfo;
+import org.tamanegi.wallpaper.multipicture.MultiPictureSetting;
+import org.tamanegi.wallpaper.multipicture.plugin.ScreenInfo;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

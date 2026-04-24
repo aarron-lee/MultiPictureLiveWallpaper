@@ -1,11 +1,11 @@
-package org.alee.wallpaper.multipicture.picsource;
+package org.tamanegi.wallpaper.multipicture.picsource;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-import org.alee.wallpaper.multipicture.R;
+import org.tamanegi.wallpaper.multipicture.R;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -29,9 +29,9 @@ public class FolderPicker extends Activity
     public static final String EXTRA_PATH = "extraPath";
 
     private static final String KEY_CUR_FOLDER =
-        "org.alee.wallpaper.multipicture:cur_folder";
+        "org.tamanegi.wallpaper.multipicture:cur_folder";
     private static final String KEY_HIST =
-        "org.alee.wallpaper.multipicture:hist";
+        "org.tamanegi.wallpaper.multipicture:hist";
 
     private File cur_folder = null;
     private LinkedList<File> hist = null;

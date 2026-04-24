@@ -1,4 +1,4 @@
-package org.alee.wallpaper.multipicture.plugin;
+package org.tamanegi.wallpaper.multipicture.plugin;
 
 import android.content.ComponentName;
 import android.content.Context;

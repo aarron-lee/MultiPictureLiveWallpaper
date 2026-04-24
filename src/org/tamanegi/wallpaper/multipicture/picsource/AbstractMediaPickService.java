@@ -1,8 +1,8 @@
-package org.alee.wallpaper.multipicture.picsource;
+package org.tamanegi.wallpaper.multipicture.picsource;
 
 import java.util.Random;
 
-import org.alee.wallpaper.multipicture.plugin.PictureContentInfo;
+import org.tamanegi.wallpaper.multipicture.plugin.PictureContentInfo;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;

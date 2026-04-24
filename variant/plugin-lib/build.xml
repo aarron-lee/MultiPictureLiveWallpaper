@@ -11,7 +11,7 @@
 
   <property name="javadoc.path" location="javadoc" />
   <property name="javadoc.pkg"
-            value="org.alee.wallpaper.multipicture.plugin" />
+            value="org.tamanegi.wallpaper.multipicture.plugin" />
 
   <property name="sample.path" location="sample" />
 

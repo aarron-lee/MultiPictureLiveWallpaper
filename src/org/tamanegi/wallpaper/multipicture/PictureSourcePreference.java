@@ -1,14 +1,14 @@
-package org.alee.wallpaper.multipicture;
+package org.tamanegi.wallpaper.multipicture;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.alee.wallpaper.multipicture.picsource.AlbumSource;
-import org.alee.wallpaper.multipicture.picsource.FolderSource;
-import org.alee.wallpaper.multipicture.picsource.SingleSource;
-import org.alee.wallpaper.multipicture.plugin.PictureSourceContract;
+import org.tamanegi.wallpaper.multipicture.picsource.AlbumSource;
+import org.tamanegi.wallpaper.multipicture.picsource.FolderSource;
+import org.tamanegi.wallpaper.multipicture.picsource.SingleSource;
+import org.tamanegi.wallpaper.multipicture.plugin.PictureSourceContract;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -36,8 +36,8 @@ public class PictureSourcePreference extends DialogPreference
     private static final String KEY_COMPONENT = "component";
 
     private static final String[] VARIANT_PACKAGES = {
-        "org.alee.wallpaper.multipicture",
-        "org.alee.wallpaper.multipicture.dnt",
+        "org.tamanegi.wallpaper.multipicture",
+        "org.tamanegi.wallpaper.multipicture.dnt",
     };
 
     private static final String[] ITEM_FROM = {

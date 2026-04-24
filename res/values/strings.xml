@@ -139,7 +139,7 @@
   <!-- DO NOT localize below -->
   <string name="workaround_default">htc_sense</string>
   <string name="plugin_search_uri">market://search?q=MultiPicture-Live-Wallpaper</string>
-  <string name="dnt_search_uri">market://search?q=pname:org.alee.wallpaper.multipicture.dnt</string>
+  <string name="dnt_search_uri">market://search?q=pname:org.tamanegi.wallpaper.multipicture.dnt</string>
 
-  <string name="share_text">MultiPicture Live Wallpaper http://market.android.com/details?id=org.alee.wallpaper.multipicture</string>
+  <string name="share_text">MultiPicture Live Wallpaper http://market.android.com/details?id=org.tamanegi.wallpaper.multipicture</string>
 </resources>

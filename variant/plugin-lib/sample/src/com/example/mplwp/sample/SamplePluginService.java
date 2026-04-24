@@ -2,8 +2,8 @@ package com.example.mplwp.sample;
 
 import android.net.Uri;
 
-import org.alee.wallpaper.multipicture.plugin.LazyPickService;
-import org.alee.wallpaper.multipicture.plugin.PictureContentInfo;
+import org.tamanegi.wallpaper.multipicture.plugin.LazyPickService;
+import org.tamanegi.wallpaper.multipicture.plugin.PictureContentInfo;
 
 public class SamplePluginService extends LazyPickService
 {
