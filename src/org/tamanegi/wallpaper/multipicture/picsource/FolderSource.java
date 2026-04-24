@@ -1,8 +1,8 @@
-package org.tamanegi.wallpaper.multipicture.picsource;
+package org.alee.wallpaper.multipicture.picsource;
 
-import org.tamanegi.wallpaper.multipicture.MultiPictureSetting;
-import org.tamanegi.wallpaper.multipicture.R;
-import org.tamanegi.wallpaper.multipicture.plugin.PictureSourceContract;
+import org.alee.wallpaper.multipicture.MultiPictureSetting;
+import org.alee.wallpaper.multipicture.R;
+import org.alee.wallpaper.multipicture.plugin.PictureSourceContract;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;

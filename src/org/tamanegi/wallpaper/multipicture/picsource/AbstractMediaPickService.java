@@ -1,8 +1,8 @@
-package org.tamanegi.wallpaper.multipicture.picsource;
+package org.alee.wallpaper.multipicture.picsource;
 
 import java.util.Random;
 
-import org.tamanegi.wallpaper.multipicture.plugin.PictureContentInfo;
+import org.alee.wallpaper.multipicture.plugin.PictureContentInfo;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -223,12 +223,12 @@ public abstract class AbstractMediaPickService
             filter = new IntentFilter();
             filter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
             filter.addDataScheme(ContentResolver.SCHEME_FILE);
-            registerReceiver(this, filter);
+            registerReceiver(AbstractMediaPickService.this, this, filter);
 
             filter = new IntentFilter();
             filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
             filter.addDataScheme(ContentResolver.SCHEME_FILE);
-            registerReceiver(this, filter);
+            registerReceiver(AbstractMediaPickService.this, this, filter);
         }
 
         private void stop()

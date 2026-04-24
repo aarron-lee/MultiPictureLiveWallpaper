@@ -8,7 +8,7 @@
        android:summary="@string/pref_group_screen_default_summary"
        android:order="0"
        >
-      <org.tamanegi.wallpaper.multipicture.PictureSourcePreference
+      <org.alee.wallpaper.multipicture.PictureSourcePreference
          android:key="screen.default.picsource"
          android:title="@string/pref_screen_type_title"
          android:summary="@string/pref_screen_type_base_summary"
@@ -43,7 +43,7 @@
          android:defaultValue="1.0" />
     </PreferenceScreen>
     <!-- insert PreferenceScreen of each screen at runtime -->
-    <org.tamanegi.wallpaper.multipicture.ScreenPickerPreference
+    <org.alee.wallpaper.multipicture.ScreenPickerPreference
        android:key="screen.picker"
        android:title="@string/pref_add_screen_title"
        android:summary="@string/pref_add_screen_summary"
@@ -63,7 +63,7 @@
        android:dependency="screen.keyguard.enable"
        android:order="0x7fffff81"
        >
-      <org.tamanegi.wallpaper.multipicture.PictureSourcePreference
+      <org.alee.wallpaper.multipicture.PictureSourcePreference
          android:key="screen.keyguard.picsource"
          android:title="@string/pref_screen_type_title"
          android:summary="@string/pref_screen_type_base_summary"

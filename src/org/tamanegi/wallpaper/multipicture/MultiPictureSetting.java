@@ -1,13 +1,13 @@
-package org.tamanegi.wallpaper.multipicture;
+package org.alee.wallpaper.multipicture;
 
 import java.lang.reflect.Method;
 import java.util.IllegalFormatException;
 
-import org.tamanegi.wallpaper.multipicture.picsource.AlbumSource;
-import org.tamanegi.wallpaper.multipicture.picsource.FolderSource;
-import org.tamanegi.wallpaper.multipicture.picsource.PictureUtils;
-import org.tamanegi.wallpaper.multipicture.picsource.SingleSource;
-import org.tamanegi.wallpaper.multipicture.plugin.PictureSourceContract;
+import org.alee.wallpaper.multipicture.picsource.AlbumSource;
+import org.alee.wallpaper.multipicture.picsource.FolderSource;
+import org.alee.wallpaper.multipicture.picsource.PictureUtils;
+import org.alee.wallpaper.multipicture.picsource.SingleSource;
+import org.alee.wallpaper.multipicture.plugin.PictureSourceContract;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -19,9 +19,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -146,6 +149,47 @@ public class MultiPictureSetting extends PreferenceActivity
         }
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        checkStoragePermission();
+    }
+
+    private void checkStoragePermission()
+    {
+        if(Build.VERSION.SDK_INT < 30) {
+            return;
+        }
+        if(Environment.isExternalStorageManager()) {
+            return;
+        }
+        new AlertDialog.Builder(this)
+            .setTitle("Storage Permission Required")
+            .setMessage(
+                "This app needs \"All Files Access\" to load wallpapers " +
+                "from your storage. Please grant the permission on the " +
+                "next screen.")
+            .setPositiveButton(
+                "Grant Permission",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(
+                            Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                            Uri.parse("package:" + getPackageName()));
+                        try {
+                            startActivity(intent);
+                        }
+                        catch(ActivityNotFoundException e) {
+                            startActivity(new Intent(
+                                Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION));
+                        }
+                    }
+                })
+            .setNegativeButton("Not Now", null)
+            .show();
+    }
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -157,7 +201,7 @@ public class MultiPictureSetting extends PreferenceActivity
         resolver = getContentResolver();
         handler = new Handler();
 
-        if(! "org.tamanegi.wallpaper.multipicture".equals(getPackageName())) {
+        if(! "org.alee.wallpaper.multipicture".equals(getPackageName())) {
             getPreferenceScreen().removePreference(
                     getPreferenceManager().findPreference("other.cat"));
         }

@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'org.alee.wallpaper.multipicture.dnt'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'org.alee.wallpaper.multipicture.dnt'
+        minSdk 7
+        targetSdk 34
+        versionCode 48
+        versionName '0.6.12'
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res']
+        }
+    }
+
+    signingConfigs {
+        release {
+            if (project.hasProperty('RELEASE_STORE_FILE')) {
+                storeFile     file(RELEASE_STORE_FILE)
+                storePassword project.property('RELEASE_STORE_PASSWORD')
+                keyAlias      project.property('RELEASE_KEY_ALIAS')
+                keyPassword   project.property('RELEASE_KEY_PASSWORD')
+            } else {
+                // fallback: debug keystore keeps the APK installable in CI
+                storeFile     file("${System.getProperty('user.home')}/.android/debug.keystore")
+                storePassword 'android'
+                keyAlias      'androiddebugkey'
+                keyPassword   'android'
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            // default debug signing applied automatically
+        }
+        release {
+            signingConfig  signingConfigs.release
+            minifyEnabled  false
+            shrinkResources false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation project(':')
+}

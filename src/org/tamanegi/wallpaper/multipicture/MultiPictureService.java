@@ -1,4 +1,4 @@
-package org.tamanegi.wallpaper.multipicture;
+package org.alee.wallpaper.multipicture;
 
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;

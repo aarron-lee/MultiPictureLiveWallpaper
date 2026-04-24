@@ -1,13 +1,13 @@
-package org.tamanegi.wallpaper.multipicture.picsource;
+package org.alee.wallpaper.multipicture.picsource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.tamanegi.wallpaper.multipicture.MultiPictureSetting;
-import org.tamanegi.wallpaper.multipicture.plugin.LazyPickService;
-import org.tamanegi.wallpaper.multipicture.plugin.PictureContentInfo;
-import org.tamanegi.wallpaper.multipicture.plugin.ScreenInfo;
+import org.alee.wallpaper.multipicture.MultiPictureSetting;
+import org.alee.wallpaper.multipicture.plugin.LazyPickService;
+import org.alee.wallpaper.multipicture.plugin.PictureContentInfo;
+import org.alee.wallpaper.multipicture.plugin.ScreenInfo;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -253,12 +253,12 @@ public class SinglePickService extends LazyPickService
             filter = new IntentFilter();
             filter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
             filter.addDataScheme(ContentResolver.SCHEME_FILE);
-            registerReceiver(this, filter);
+            registerReceiver(SinglePickService.this, this, filter);
 
             filter = new IntentFilter();
             filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
             filter.addDataScheme(ContentResolver.SCHEME_FILE);
-            registerReceiver(this, filter);
+            registerReceiver(SinglePickService.this, this, filter);
         }
 
         private void stop()

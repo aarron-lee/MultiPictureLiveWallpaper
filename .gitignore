@@ -1,4 +1,24 @@
-bin
-gen
+# Build outputs
+build/
+*/build/
+*.apk
+*.aab
+
+# Gradle
+.gradle/
 local.properties
-*.jar
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+
+# Eclipse (legacy, replaced by Gradle)
+bin/
+gen/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db

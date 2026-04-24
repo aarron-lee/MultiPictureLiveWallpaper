@@ -1,4 +1,4 @@
-package org.tamanegi.wallpaper.multipicture.picsource;
+package org.alee.wallpaper.multipicture.picsource;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import org.tamanegi.wallpaper.multipicture.MultiPictureSetting;
-import org.tamanegi.wallpaper.multipicture.plugin.PictureContentInfo;
-import org.tamanegi.wallpaper.multipicture.plugin.ScreenInfo;
+import org.alee.wallpaper.multipicture.MultiPictureSetting;
+import org.alee.wallpaper.multipicture.plugin.PictureContentInfo;
+import org.alee.wallpaper.multipicture.plugin.ScreenInfo;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -220,7 +220,7 @@ public class FolderDirectPickService extends AbstractFileListPickService
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
         filter.addDataScheme(ContentResolver.SCHEME_FILE);
-        registerReceiver(receiver, filter);
+        registerReceiver(this, receiver, filter);
     }
 
     @Override
