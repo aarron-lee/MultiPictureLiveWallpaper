@@ -2309,7 +2309,7 @@ public class MultiPictureRenderer
             while(max_work_pixels > 0 &&
                   (opt.outWidth / ratio) *
                   (opt.outHeight / ratio) > max_work_pixels) {
-                ratio *= 2;
+                ratio += 1;
             }
 
             // read picture
@@ -2345,8 +2345,8 @@ public class MultiPictureRenderer
 
             float cw = bw - target_width / bscale;
             float ch = bh - target_height / bscale;
-            int src_x = Math.round(cw < 0 ? 0 : cw / 2);
-            int src_y = Math.round(ch < 0 ? 0 : ch / 2);
+            int src_x = (int)(cw < 0 ? 0 : cw / 2);
+            int src_y = (int)(ch < 0 ? 0 : ch / 2);
             int src_w = bw - src_x * 2;
             int src_h = bh - src_y * 2;
 
