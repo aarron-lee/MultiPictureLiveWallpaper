@@ -5,7 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.tamanegi.wallpaper.multipicture.plugin.PictureSourceContract;
+import org.alee.wallpaper.multipicture.plugin.PictureSourceContract;
 
 public class SamplePluginSource extends Activity
 {

@@ -1,4 +1,4 @@
-package org.tamanegi.wallpaper.multipicture;
+package org.alee.wallpaper.multipicture;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -9,12 +9,12 @@ import java.util.Random;
 import org.tamanegi.gles.GLCanvas;
 import org.tamanegi.gles.GLColor;
 import org.tamanegi.gles.GLMatrix;
-import org.tamanegi.wallpaper.multipicture.picsource.AlbumPickService;
-import org.tamanegi.wallpaper.multipicture.picsource.FolderPickService;
-import org.tamanegi.wallpaper.multipicture.picsource.SinglePickService;
-import org.tamanegi.wallpaper.multipicture.plugin.LazyPickerClient;
-import org.tamanegi.wallpaper.multipicture.plugin.PictureContentInfo;
-import org.tamanegi.wallpaper.multipicture.plugin.ScreenInfo;
+import org.alee.wallpaper.multipicture.picsource.AlbumPickService;
+import org.alee.wallpaper.multipicture.picsource.FolderPickService;
+import org.alee.wallpaper.multipicture.picsource.SinglePickService;
+import org.alee.wallpaper.multipicture.plugin.LazyPickerClient;
+import org.alee.wallpaper.multipicture.plugin.PictureContentInfo;
+import org.alee.wallpaper.multipicture.plugin.ScreenInfo;
 
 import android.app.AlarmManager;
 import android.app.KeyguardManager;
@@ -96,7 +96,7 @@ public class MultiPictureRenderer
 
     // for broadcast intent
     private static final String ACTION_CHANGE_PICTURE =
-        "org.tamanegi.wallpaper.multipicture.CHANGE_PICTURE";
+        "org.alee.wallpaper.multipicture.CHANGE_PICTURE";
 
     private static final String ACTION_EXTERNAL_APPLICATIONS_AVAILABLE =
         "android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE";

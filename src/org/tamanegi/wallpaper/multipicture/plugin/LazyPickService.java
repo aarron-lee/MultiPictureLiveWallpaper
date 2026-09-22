@@ -1,4 +1,4 @@
-package org.tamanegi.wallpaper.multipicture.plugin;
+package org.alee.wallpaper.multipicture.plugin;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -29,7 +29,7 @@ public abstract class LazyPickService extends Service
      * Value: {@value}
      */
     public static final String SERVICE_INTERFACE =
-        "org.tamanegi.wallpaper.multipicture.plugin.LazyPickService";
+        "org.alee.wallpaper.multipicture.plugin.LazyPickService";
 
     static final int MSG_CREATE          = 0x00100000;
     static final int MSG_RESULT_CREATE   = 0x00200000;

@@ -1,0 +1,11 @@
+## Instructions
+
+Note that you need to use adb to enable the Shizuku app.
+
+1. Download last released apk from releases, or from the developer's website: https://www.tamanegi.org/prog/android-apps/mplwp.html
+2. Download InstallWithOptions: https://github.com/zacharee/InstallWithOptions/releases
+3. InstallWithOptions requires the Shizuku app: https://github.com/zacharee/InstallWithOptions
+4. Follow Shizuku in-app instructions to enable it via adb
+5. Once Shizuku is enabled, grant InstallWithOptions permissions via Shizuku
+6. Install the MultiPictureLiveWallpaper app with InstallWithOptions, make sure to override the Android version check and enable + auto-grant permissions to the MultiPictureLiveWallpaper app
+7. Install should finish, and it'll be available as a Live wallpaper

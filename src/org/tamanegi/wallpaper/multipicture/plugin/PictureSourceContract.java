@@ -1,4 +1,4 @@
-package org.tamanegi.wallpaper.multipicture.plugin;
+package org.alee.wallpaper.multipicture.plugin;
 
 /**
  * The contract between the live wallpaper and plugins.
@@ -15,7 +15,7 @@ public final class PictureSourceContract
      * Value: {@value}
      */
     public static final String ACTION_GET_PICTURE_SOURCE =
-        "org.tamanegi.wallpaper.multipicture.action.GET_PICTURE_SOURCE";
+        "org.alee.wallpaper.multipicture.action.GET_PICTURE_SOURCE";
 
     /**
      * Extra key of {@link java.lang.String} value to indicate configuration key.
@@ -45,7 +45,7 @@ public final class PictureSourceContract
     public static final String EXTRA_DESCRIPTION = "description";
 
     /**
-     * Extra key of {@link android.content.ComponentName} value to indicate {@link org.tamanegi.wallpaper.multipicture.plugin.LazyPickService}.
+     * Extra key of {@link android.content.ComponentName} value to indicate {@link org.alee.wallpaper.multipicture.plugin.LazyPickService}.
      * <br>
      * <br>
      * Value: {@value}

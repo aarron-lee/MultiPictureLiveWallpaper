@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'org.tamanegi.wallpaper.multipicture'
+    namespace 'org.alee.wallpaper.multipicture'
     compileSdk 34
 
     defaultConfig {
