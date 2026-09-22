@@ -92,7 +92,7 @@ public class ColorPickerView extends View
         canvas.restore();
 
         // rect
-        float l = (r - line_width / 2) * ((float) Math.sqrt(2)) - 2;
+        float l = (float) ((r - line_width / 2) * Math.sqrt(2) - 2);
         canvas.save();
         canvas.translate((w - l) / 2, (h - l) / 2);
         for(int i = 0; i < 100; i++) {
@@ -116,7 +116,7 @@ public class ColorPickerView extends View
 
         float rmax = Math.min(w2, h2);
         float rmin = rmax - line_width;
-        float rmin2 = rmin /((float) Math.sqrt(2));
+        float rmin2 = (float) (rmin / Math.sqrt(2));
 
         float x = event.getX() - w2;
         float y = event.getY() - h2;
@@ -156,7 +156,7 @@ public class ColorPickerView extends View
     private void pickColor(float x, float y, float rmin2)
     {
         if(touching == TouchingType.ring) {
-            float deg = (float)(Math.atan2(-y, x) / Math.PI);
+            float deg = (float)(Math.atan2(-y, x) / Math.PI);            
             hsv[0] = (deg < 0 ? deg + 2 : deg) * 180;
             setColor(Color.HSVToColor(hsv), false);
         }

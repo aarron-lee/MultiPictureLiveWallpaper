@@ -1553,12 +1553,12 @@ public class MultiPictureRenderer
             float ang1 = (float)(fact * Math.PI);
             float ang2 = (float)Math.atan2(-dy, dx);
 
-            effect.matrix.translate(
-                (float) Math.cos(ang2) * (float) Math.sin(ang1) * 1.01f * wratio,
-                (float) Math.sin(ang2) * (float) Math.sin(ang1) * 1.01f,
-                ((float) Math.cos(ang1) - 1) * 2);
+        effect.matrix.translate(
+                (float) (Math.cos(ang2) * Math.sin(ang1) * 1.01f * wratio),
+                (float) (Math.sin(ang2) * Math.sin(ang1) * 1.01f),
+                (float) ((Math.cos(ang1) - 1) * 2));
 
-            effect.alpha *= Math.min(((float) Math.cos(ang1) + 1) * 2, 1);
+        effect.alpha *= (float) Math.min((Math.cos(ang1) + 1) * 2, 1);
         }
         else if(transition == TransitionType.cube) {
             float fact = Math.max(Math.abs(dx), Math.abs(dy));
@@ -1571,13 +1571,13 @@ public class MultiPictureRenderer
 
             effect.matrix
                 .translate(
-                    (float) Math.cos(ang2) * (float) Math.sin(ang1) * wratio,
-                    (float) Math.sin(ang2) * (float) Math.sin(ang1),
-                    ((float) Math.cos(ang1) - 1) * (wratio + 1) * 0.5f)
+                    (float) (Math.cos(ang2) * Math.sin(ang1) * wratio),
+                    (float) (Math.sin(ang2) * Math.sin(ang1)),
+                    (float) ((Math.cos(ang1) - 1) * (wratio + 1) * 0.5f))
                 .rotateY(dx * 90)
                 .rotateX(dy * 90);
 
-            effect.alpha *= Math.min((float) Math.cos(ang1), 1);
+            effect.alpha *= (float) Math.min(Math.cos(ang1), 1);
             effect.need_border = true;
         }
         else if(transition == TransitionType.cube_inside) {
@@ -1586,18 +1586,18 @@ public class MultiPictureRenderer
                 return null;
             }
 
-            float ang1 = (float)(fact * Math.PI / 2);
-            float ang2 = (float)Math.atan2(-dy, dx);
+            float ang1 = (float) (fact * Math.PI / 2);
+            float ang2 = (float) Math.atan2(-dy, dx);
 
             effect.matrix
                 .translate(
-                    (float) Math.cos(ang2) * (float) Math.sin(ang1) * wratio,
-                    (float) Math.sin(ang2) * (float) Math.sin(ang1),
-                    ((float) Math.cos(ang1) - 1) * (wratio + 1) * -0.5f)
+                    (float) (Math.cos(ang2) * Math.sin(ang1) * wratio),
+                    (float) (Math.sin(ang2) * Math.sin(ang1)),
+                    (float)((Math.cos(ang1) - 1) * (wratio + 1) * -0.5f))
                 .rotateY(dx * -90)
                 .rotateX(dy * -90);
 
-            effect.alpha *= Math.min((float) Math.cos(ang1), 1);
+            effect.alpha *= (float) Math.min(Math.cos(ang1), 1);
             effect.need_border = true;
         }
         else if(transition == TransitionType.bookshelf) {
@@ -1616,8 +1616,7 @@ public class MultiPictureRenderer
                 wratio * Math.max(0, 1 - atdx);
 
             rx = rx * sy + rx * (1 - ratdx * ratdx) * rsy;
-            tx += (float) Math.sin(Math.min(1, Math.max(-1, tdx)) *
-                                (float)Math.PI) * 0.25f * wratio * rsy;
+            tx += (float) Math.sin(Math.min(1, Math.max(-1, tdx)) * Math.PI) * 0.25f * wratio * rsy;
             tz = tz * sy + tz * Math.min(1, Math.abs(tdx)) * rsy;
 
             effect.matrix
