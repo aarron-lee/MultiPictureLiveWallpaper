@@ -1,5 +1,7 @@
 package org.alee.wallpaper.multipicture;
 
+import org.alee.wallpaper.multipicture.FloatMath;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -92,7 +94,7 @@ public class ColorPickerView extends View
         canvas.restore();
 
         // rect
-        float l = (r - line_width / 2) * ((float) Math.sqrt(2)) - 2;
+        float l = (r - line_width / 2) * FloatMath.sqrt(2) - 2;
         canvas.save();
         canvas.translate((w - l) / 2, (h - l) / 2);
         for(int i = 0; i < 100; i++) {
@@ -116,7 +118,7 @@ public class ColorPickerView extends View
 
         float rmax = Math.min(w2, h2);
         float rmin = rmax - line_width;
-        float rmin2 = rmin /((float) Math.sqrt(2));
+        float rmin2 = rmin / FloatMath.sqrt(2);
 
         float x = event.getX() - w2;
         float y = event.getY() - h2;
