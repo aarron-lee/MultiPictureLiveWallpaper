@@ -91,8 +91,17 @@ public class MultiPictureRenderer
 
     // maximum size of pictures
     private static final int PIXELS_PER_MB = 1024 * 1024 / 2; // 512kPixels/MB
+    // the transient decode buffer is ARGB_8888 (4 bytes/pixel), unlike
+    // PIXELS_PER_MB above which is calibrated for the 2-bytes/pixel final
+    // on-screen textures -- use a separately-calibrated constant for it
+    private static final int WORK_PIXELS_PER_MB = 1024 * 1024 / 4; // 256kPixels/MB
     private static final int MAX_DETECT_PIXELS = 8 * 1024; // 8kPixels
     private static final int MAX_INSAMPLE_SIZE = 64; // give up shrinking beyond this
+    // a wallpaper picture is only ever shown on one screen, so decoding
+    // much beyond this multiple of that screen's own pixel count buys no
+    // visible quality -- it only spends memory (and OOM risk) on detail
+    // that gets thrown away when the final, screen-sized texture is built
+    private static final int WORK_PIXELS_OVERSAMPLE = 6;
 
     private static final int MEMORY_SIZE_OFFSET = 8;
 
@@ -932,7 +941,41 @@ public class MultiPictureRenderer
             // restrict by memory class
             int max_total_pixels = max_memory_size * PIXELS_PER_MB;
             max_screen_pixels = max_total_pixels / (cnt + 3);
-            max_work_pixels = max_screen_pixels * 2;
+
+            // The initial decode buffer is transient (recycled right
+            // after the final texture bitmap is built) and, since
+            // picture loading happens one at a time on a single
+            // background thread, only one is ever alive at once --
+            // unlike max_screen_pixels above, which sizes memory that
+            // stays resident for every configured screen simultaneously.
+            // So it doesn't need to shrink as screen count grows; give
+            // it its own, more generous budget (properly calibrated for
+            // the buffer's actual ARGB_8888 bytes-per-pixel) so large
+            // source images -- we want to comfortably support up to
+            // roughly 8000x8000 -- still decode at good quality instead
+            // of being crushed down to fit a many-screens-divided one.
+            // Two-thirds of the budget is kept as headroom for the
+            // resident per-screen textures and general decoder/OS
+            // overhead that are still in memory while this transient
+            // buffer is alive.
+            int max_total_work_pixels = max_memory_size * WORK_PIXELS_PER_MB;
+            max_work_pixels = Math.max(max_screen_pixels * 2,
+                                       max_total_work_pixels / 3);
+
+            // A single picture is only ever displayed on one screen, no
+            // matter how many screens (cnt) are configured or how
+            // generous the memory-class-derived budget above is -- so
+            // there's nothing to gain from decoding far past what that
+            // one screen can show. Cap it to a generous multiple of the
+            // actual per-screen pixel count; this only ever pulls the
+            // budget down (never up), so it can't make a low-memory
+            // device more OOM-prone, it just avoids wasting a high-
+            // memory device's headroom (and risk) on invisible detail.
+            int screen_pixels = width * height;
+            if(screen_pixels > 0) {
+                max_work_pixels = Math.min(
+                    max_work_pixels, screen_pixels * WORK_PIXELS_OVERSAMPLE);
+            }
         }
         else {
             // unlimited size
@@ -2307,20 +2350,16 @@ public class MultiPictureRenderer
                 instream.close();
             }
 
-            // Pick a power-of-two inSampleSize (BitmapFactory only honors
-            // powers of two; anything else is silently rounded down, which
-            // for large images meant we decoded *more* pixels than the
-            // memory budget expected). Only shrink the image while doing so
-            // still leaves it at least as large as the screen needs, so we
-            // never have to upscale the result back up later -- that
-            // upscale-after-over-shrinking is what produced the blurry,
-            // "zoomed in / cropped" look on large pictures.
+            // Pick a power-of-two inSampleSize. BitmapFactory only honors
+            // powers of two; anything else is silently rounded *down*
+            // (i.e. less shrinking than asked for), which is what let
+            // large images decode more pixels than max_work_pixels
+            // budgeted and risk OOM. This targets the budget directly and
+            // precisely, instead of overshooting it.
             int ratio = 1;
             while(max_work_pixels > 0 &&
-                  (opt.outWidth / (ratio * 2)) >= target_width &&
-                  (opt.outHeight / (ratio * 2)) >= target_height &&
-                  (opt.outWidth / (ratio * 2)) *
-                  (opt.outHeight / (ratio * 2)) > max_work_pixels) {
+                  (opt.outWidth / ratio) *
+                  (opt.outHeight / ratio) > max_work_pixels) {
                 ratio *= 2;
             }
 
