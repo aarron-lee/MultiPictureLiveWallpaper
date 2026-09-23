@@ -2334,13 +2334,19 @@ public class MultiPictureRenderer
                 instream.close();
             }
 
-            // scale the image down in-memory prior to processing
+            // scale the image in-memory prior to processing
             int origW = bmp.getWidth();
             int origH = bmp.getHeight();
-            if (origW > target_width || origH > target_height) {
-                float scale = Math.min((float) target_width / origW, (float) target_height / origH);
+
+            // 1.25x scaled target dimensions
+            int effectiveTargetW = (int) (target_width * 1.25f);
+            int effectiveTargetH = (int) (target_height * 1.25f);
+
+            if (origW > effectiveTargetW || origH > effectiveTargetH) {
+                float scale = Math.min((float) effectiveTargetW / origW, (float) effectiveTargetH / origH);
                 int scaledW = Math.max(1, (int) (origW * scale));
                 int scaledH = Math.max(1, (int) (origH * scale));
+
                 Bitmap scaledBmp = Bitmap.createScaledBitmap(bmp, scaledW, scaledH, true);
                 if (scaledBmp != bmp) {
                     bmp.recycle();
