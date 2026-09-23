@@ -2333,6 +2333,20 @@ public class MultiPictureRenderer
                 instream.close();
             }
 
+            // scale the image down in-memory prior to processing
+            int origW = bmp.getWidth();
+            int origH = bmp.getHeight();
+            if (origW > target_width || origH > target_height) {
+                float scale = Math.min((float) target_width / origW, (float) target_height / origH);
+                int scaledW = Math.max(1, (int) (origW * scale));
+                int scaledH = Math.max(1, (int) (origH * scale));
+                Bitmap scaledBmp = Bitmap.createScaledBitmap(bmp, scaledW, scaledH, true);
+                if (scaledBmp != bmp) {
+                    bmp.recycle();
+                    bmp = scaledBmp;
+                }
+            }
+
             // calc geometry of subset to draw
             int bw = bmp.getWidth();
             int bh = bmp.getHeight();
