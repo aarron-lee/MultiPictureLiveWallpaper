@@ -90,8 +90,8 @@ public class MultiPictureRenderer
     private static final int KEYGUARD_FADE_DURATION = 1000;  // msec
 
     // maximum size of pictures
-    private static final int PIXELS_PER_MB = 1024 * 1024 / 2; // 512kPixels/MB
-    private static final int MAX_DETECT_PIXELS = 8 * 1024; // 8kPixels
+    private static final int PIXELS_PER_MB = 8192 * 8192 / 2; // 512kPixels/MB
+    private static final int MAX_DETECT_PIXELS = 8 * 8192; // 8kPixels
 
     private static final int MEMORY_SIZE_OFFSET = 8;
 
