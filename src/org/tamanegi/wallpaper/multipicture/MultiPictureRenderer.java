@@ -92,6 +92,7 @@ public class MultiPictureRenderer
     // maximum size of pictures
     private static final int PIXELS_PER_MB = 1024 * 1024 / 2; // 512kPixels/MB
     private static final int MAX_DETECT_PIXELS = 8 * 1024; // 8kPixels
+    private static final int MAX_INSAMPLE_SIZE = 64; // give up shrinking beyond this
 
     private static final int MEMORY_SIZE_OFFSET = 8;
 
@@ -2306,11 +2307,21 @@ public class MultiPictureRenderer
                 instream.close();
             }
 
+            // Pick a power-of-two inSampleSize (BitmapFactory only honors
+            // powers of two; anything else is silently rounded down, which
+            // for large images meant we decoded *more* pixels than the
+            // memory budget expected). Only shrink the image while doing so
+            // still leaves it at least as large as the screen needs, so we
+            // never have to upscale the result back up later -- that
+            // upscale-after-over-shrinking is what produced the blurry,
+            // "zoomed in / cropped" look on large pictures.
             int ratio = 1;
             while(max_work_pixels > 0 &&
-                  (opt.outWidth / ratio) *
-                  (opt.outHeight / ratio) > max_work_pixels) {
-                ratio += 1;
+                  (opt.outWidth / (ratio * 2)) >= target_width &&
+                  (opt.outHeight / (ratio * 2)) >= target_height &&
+                  (opt.outWidth / (ratio * 2)) *
+                  (opt.outHeight / (ratio * 2)) > max_work_pixels) {
+                ratio *= 2;
             }
 
             // read picture
@@ -2319,19 +2330,31 @@ public class MultiPictureRenderer
             opt.inSampleSize = ratio;
             opt.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
-            Bitmap bmp;
-            instream = resolver.openInputStream(uri);
-            if(instream == null) {
-                return null;
-            }
-            try {
-                bmp = BitmapFactory.decodeStream(instream, null, opt);
-                if(bmp == null) {
+            // Large images are the ones most likely to blow the memory
+            // budget at this sample size; rather than failing the whole
+            // picture, retry at a coarser sample size until it fits.
+            Bitmap bmp = null;
+            while(bmp == null) {
+                instream = resolver.openInputStream(uri);
+                if(instream == null) {
                     return null;
                 }
-            }
-            finally {
-                instream.close();
+                try {
+                    bmp = BitmapFactory.decodeStream(instream, null, opt);
+                }
+                catch(OutOfMemoryError e) {
+                    bmp = null;
+                }
+                finally {
+                    instream.close();
+                }
+
+                if(bmp == null) {
+                    if(opt.inSampleSize >= MAX_INSAMPLE_SIZE) {
+                        return null;
+                    }
+                    opt.inSampleSize *= 2;
+                }
             }
 
             // calc geometry of subset to draw
